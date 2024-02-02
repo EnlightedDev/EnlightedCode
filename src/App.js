@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import MainPage from "./pages/MainPage";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
+import './styles.css'
+
 class App extends Component {
     render() {
         return (

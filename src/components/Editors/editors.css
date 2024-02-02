@@ -1,0 +1,12 @@
+.editors {
+    width: 100vw;
+    display: flex;
+    /* justify-content: space-between; */
+    
+}
+
+.bar {
+    width: 20px;
+    background-color: rgb(190, 183, 137);
+}
+

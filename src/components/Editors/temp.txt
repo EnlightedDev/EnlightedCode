@@ -1,0 +1,95 @@
+import React, { useState, useRef, useEffect } from 'react'
+import AceEditor from 'react-ace'
+import ReactDOM from 'react-dom';
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
+
+import brace from 'brace';
+import 'brace/mode/javascript';
+import 'brace/mode/html';
+import 'brace/mode/css';
+
+import './editors.css'
+import 'brace/theme/twilight';
+
+const Editors = () => {
+
+  const aceEditorRef = useRef(null);
+
+ 
+
+  const [htmlWidth, sethtmlWidth] = useState(33.3);
+  const [cssWidth, setcssWidth] = useState(33.3);
+  const [jsWidth, setjsWidth] = useState(33.3);
+
+
+
+  return (
+    <div className='main'>
+        <div className="container">
+            <div className = "editors">
+
+              {/* <div className="item"></div>
+              <div className="item"></div>
+              <div className="item"></div> */}
+
+            <ResizableBox width="33.3%" height="100%" minConstraints={[100, 100]} className="resizable-box">
+            <AceEditor
+                mode="html"  
+                theme="twilight"
+                splits={2}
+                orientation="beside"
+                editorProps={{ $blockScrolling: true }}
+                // className='edit-box'
+                height='100%'
+                width='100%'
+                ></AceEditor>
+            </ResizableBox>
+            <ResizableBox width="33.3%" height="100%" minConstraints={[100, 100]} className="resizable-box">
+              <AceEditor
+                  mode="css"  
+                  theme="twilight"
+                  splits={2}
+                  orientation="beside"
+                  editorProps={{ $blockScrolling: true }}
+                  // className='edit-box'
+                  height='100%'
+                  width='100%'
+              ></AceEditor>
+            </ResizableBox>
+            <ResizableBox width="33.3%" height="100%" minConstraints={[100, 100]} className="resizable-box">
+              <AceEditor
+                  mode="javascript"  
+                  theme="twilight"
+                  splits={2}
+                  orientation="beside"
+                  editorProps={{ $blockScrolling: true }}
+                  className='edit-box'
+                  height='100%'
+                  width='100%'
+              ></AceEditor>
+            </ResizableBox>
+              
+            </div>
+
+            <div className="output">
+
+            </div>
+          </div>
+        </div>
+  )
+}
+
+export default Editors
+
+
+
+
+
+
+{/* 
+                <div className="bar"></div>
+                
+                <div className="bar"></div>
+                 */}
+
