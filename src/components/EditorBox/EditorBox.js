@@ -7,19 +7,38 @@ import 'brace/mode/html';
 import 'brace/mode/css';
 import 'brace/theme/twilight';
 
+import './editorbox.css'
+
 const EditorBox = (props) => {
 
+    const {
+        language, displayLanguage, textInBox, onChange, upDown
+    } = props;
+    
+    const handleChange = (value) => {
 
+        onChange(value)
 
+    }
 
     return (
-        <div>
+        <div className='editor-Box'>
+
+            <div className="header">
+                <h2>{displayLanguage}</h2>
+                {/* <button>O/C</button> */}
+            </div> 
+
             <AceEditor
-                mode={props.language}  
+                mode=  {language}
                 theme="twilight"
                 orientation="beside"
                 editorProps={{ $blockScrolling: true }}
-                height='400px'
+                value= {textInBox}
+                width='32.5vw'
+                height= {`${upDown}px`}
+                className='editor'
+                onChange={handleChange}
             ></AceEditor>
         </div>
     )
