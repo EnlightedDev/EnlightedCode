@@ -2,16 +2,20 @@ import React, { useState } from 'react'
 import EditorBox from '../EditorBox/EditorBox'
 
 import './editors.css'
+import useLocalStorage from '../../storage/useLocalStorage'
 
 function Editors() {
 
 
-  const [html, setHtml] = useState("")
-  const [css, setCss] = useState("")
-  const [js, setjs] = useState("")
+  const [html, setHtml] = useLocalStorage("html", "")
+  const [css, setCss] = useLocalStorage("css", "")
+  const [js, setjs] = useLocalStorage("js", "")
   const [updown, setUpDown] = useState(300)
-  const [iheight, setIHeight] = useState(300)
+  const [iheight, setIHeight] = useState(270)
   const [buttonText, setButtonText] = useState('Move Up')
+  const [htmlfontSize, setHtmlFontSize] = useState(14)
+  const [cssfontSize, setCssFontSize] = useState(14)
+  const [jsfontSize, setJsFontSize] = useState(14)
   const w = 50;
 
   const handleUpDown = () => {
@@ -22,11 +26,11 @@ function Editors() {
       setUpDown(300)
     }
     
-    if(iheight == 300){
-      setIHeight(560)
+    if(iheight == 270){
+      setIHeight(530)
     }
     else {
-      setIHeight(300)
+      setIHeight(270)
     }
 
     if(buttonText == 'Move Up') {
@@ -39,16 +43,80 @@ function Editors() {
   }
 
 
+const handleFontUp = (name) => {
+  if(name == "html"){
+    if(htmlfontSize>1 && htmlfontSize<31){
+    setHtmlFontSize(htmlfontSize+2)
+    }
+  } else if(name == "css") {
+    if(cssfontSize>1 && cssfontSize<31){
+      setCssFontSize(cssfontSize+2)
+      }
+    } else {
+      if(jsfontSize>1 && jsfontSize<31){
+        setJsFontSize(jsfontSize+2)
+        }
+    }
+  } 
+
+const handleFontDown = (name) => {
+
+    if(name == "html"){
+      if(htmlfontSize>2 && htmlfontSize<33){
+        setHtmlFontSize(htmlfontSize-2)
+        }
+      } else if(name == "css") {
+      if(cssfontSize>2 && cssfontSize<33){
+        setCssFontSize(cssfontSize-2)
+        }
+      } else {
+        if(jsfontSize>2 && jsfontSize<33){
+          setJsFontSize(jsfontSize-2)
+          }
+      }
+
+  }
+
+
   const code = `<html>
                 <body>${html}</body>
                 <style>${css}</style>
                 <script>${js}</script>
                 </html>`
 
-
+  const htmlText = "</> HTML"
+  const cssText = "{ } CSS"
+  const jsText = "( ) JS"
 
   return (
     <div className='mainEditors'>   
+        <div className="break">
+          
+            <div className="htmlOptions">
+            <span class="badge text-bg-danger">{htmlText}</span>
+              <div class="btn-group bbb" role="group">
+              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("html")} >+</button>
+              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${htmlfontSize}px)`}</button>
+              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("html")} >-</button>
+              </div>
+            </div>
+            <div className="cssOptions">
+            <span class="badge text-bg-success">{cssText}</span>
+              <div class="btn-group bbb" role="group">
+              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("css")} >+</button>
+              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${cssfontSize}px)`}</button>
+              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("css")}>-</button>
+              </div>
+            </div>
+            <div className="JsOptions">
+            <span class="badge text-bg-warning">{jsText}</span>
+              <div class="btn-group bbb" role="group">
+              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("js")} >+</button>
+              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${jsfontSize}px)`}</button>
+              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("js")} >-</button>
+              </div>
+            </div>
+        </div>
         <div className='editors'>
             <div className="bar"></div>
             <EditorBox 
@@ -58,7 +126,9 @@ function Editors() {
             onChange = {setHtml}
             upDown = {updown}
             setWidth = {w}
-            className = "box"></EditorBox>
+            fontSize = {htmlfontSize}
+            className = "box"
+            />
             <div className="bar"></div>
             <EditorBox 
             language = "css"
@@ -66,7 +136,9 @@ function Editors() {
             textInBox = {css}
             onChange = {setCss}
             upDown = {updown}
-            displayLanguage = "CSS"></EditorBox>
+            fontSize = {cssfontSize}
+            displayLanguage = "CSS"
+            />
             <div className="bar"></div>
             <EditorBox 
             language = "javascript"
@@ -74,11 +146,17 @@ function Editors() {
             textInBox = {js}
             onChange = {setjs}
             upDown = {updown}
-            displayLanguage = "JS"></EditorBox>
+            fontSize = {jsfontSize}
+            displayLanguage = "JS"
+            />
             <div className="bar"></div>
         </div>
         <div className="break">
-          <button onClick={handleUpDown} >{buttonText}</button>
+
+          <button type="button" class="btn btn-danger editoroptions" onClick={handleUpDown}>{buttonText}</button>
+          
+          
+          
         </div>
         <div className='output'>
           <iframe

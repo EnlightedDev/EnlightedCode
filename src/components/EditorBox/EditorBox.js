@@ -12,7 +12,7 @@ import './editorbox.css'
 const EditorBox = (props) => {
 
     const {
-        language, displayLanguage, textInBox, onChange, upDown
+        language, displayLanguage, textInBox, onChange, upDown, fontSize
     } = props;
     
     const handleChange = (value) => {
@@ -22,12 +22,11 @@ const EditorBox = (props) => {
     }
 
     return (
-        <div className='editor-Box'>
+        <div className='editor-Box collapsed'>
 
-            <div className="header">
-                <h2>{displayLanguage}</h2>
-                {/* <button>O/C</button> */}
-            </div> 
+            {/* <div className="header">
+            <span class="badge text-bg-primary">{displayLanguage}</span>
+            </div>  */}
 
             <AceEditor
                 mode=  {language}
@@ -36,9 +35,11 @@ const EditorBox = (props) => {
                 editorProps={{ $blockScrolling: true }}
                 value= {textInBox}
                 width='32.5vw'
+                fontSize={`${fontSize}px`}
                 height= {`${upDown}px`}
                 className='editor'
                 onChange={handleChange}
+                
             ></AceEditor>
         </div>
     )
