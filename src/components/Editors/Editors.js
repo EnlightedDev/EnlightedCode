@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import EditorBox from '../EditorBox/EditorBox'
-
+import {Button, Modal } from 'react-bootstrap'
 import './editors.css'
 import useLocalStorage from '../../storage/useLocalStorage'
 
@@ -10,12 +10,14 @@ function Editors() {
   const [html, setHtml] = useLocalStorage("html", "")
   const [css, setCss] = useLocalStorage("css", "")
   const [js, setjs] = useLocalStorage("js", "")
+  const [htmlHead, setHtmlHead] = useState("")
   const [updown, setUpDown] = useState(300)
   const [iheight, setIHeight] = useState(270)
   const [buttonText, setButtonText] = useState('Move Up')
   const [htmlfontSize, setHtmlFontSize] = useState(14)
   const [cssfontSize, setCssFontSize] = useState(14)
   const [jsfontSize, setJsFontSize] = useState(14)
+  const [show, setShow] = useState(false)
   const w = 50;
 
   const handleUpDown = () => {
@@ -41,6 +43,9 @@ function Editors() {
     
 
   }
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
 const handleFontUp = (name) => {
@@ -77,8 +82,13 @@ const handleFontDown = (name) => {
 
   }
 
+  const handleHtmlHead = (e) => {
+    setHtmlHead(e.target.value);
+  };
+
 
   const code = `<html>
+                <head>${htmlHead}</head>
                 <body>${html}</body>
                 <style>${css}</style>
                 <script>${js}</script>
@@ -94,27 +104,15 @@ const handleFontDown = (name) => {
           
             <div className="htmlOptions">
             <span class="badge text-bg-danger">{htmlText}</span>
-              <div class="btn-group bbb" role="group">
-              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("html")} >+</button>
-              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${htmlfontSize}px)`}</button>
-              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("html")} >-</button>
-              </div>
+              
             </div>
             <div className="cssOptions">
             <span class="badge text-bg-success">{cssText}</span>
-              <div class="btn-group bbb" role="group">
-              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("css")} >+</button>
-              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${cssfontSize}px)`}</button>
-              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("css")}>-</button>
-              </div>
+              
             </div>
             <div className="JsOptions">
             <span class="badge text-bg-warning">{jsText}</span>
-              <div class="btn-group bbb" role="group">
-              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("js")} >+</button>
-              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${jsfontSize}px)`}</button>
-              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("js")} >-</button>
-              </div>
+              
             </div>
         </div>
         <div className='editors'>
@@ -152,11 +150,8 @@ const handleFontDown = (name) => {
             <div className="bar"></div>
         </div>
         <div className="break">
-
-          <button type="button" class="btn btn-danger editoroptions" onClick={handleUpDown}>{buttonText}</button>
-          
-          
-          
+          <button  type="button" class="btn btn-secondary editoroptions" onClick={handleUpDown}>{buttonText}</button>
+          <button  type="button" class="btn btn-secondary editoroptions" onClick={handleShow}>Settings</button>
         </div>
         <div className='output'>
           <iframe
@@ -167,6 +162,46 @@ const handleFontDown = (name) => {
             sandbox="allow-scripts"
           />
         </div>
+
+        <Modal show={show} onHide={handleClose} size = "lg">
+        
+        <Modal.Body>
+            <form>
+            <label>
+              Enter Value to be inside head section of Html:
+              <br></br>
+              <textarea value={htmlHead} onChange={handleHtmlHead} style={{width: '600px', height: '100px', }} placeholder='Example - <meta> <script>'/>
+            </label>
+          </form>
+          <p>Font for Html : </p>
+            <div class="btn-group bbb" role="group">
+                <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("html")} >+</button>
+                <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${htmlfontSize}px)`}</button>
+                <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("html")} >-</button>
+            </div>
+            <br />
+          <p>Font for Css</p>
+            <div class="btn-group bbb" role="group">
+              <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("css")} >+</button>
+              <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${cssfontSize}px)`}</button>
+              <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("css")}>-</button>
+            </div>
+            <br />
+            <p>Font for JS</p>
+              <div class="btn-group bbb" role="group">
+                <button  type="button" class="btn btn-primary editoroptions" onClick={() => handleFontUp("js")} >+</button>
+                <button type="button" class="btn btn-primary editoroptions" disabled>{`Font (${jsfontSize}px)`}</button>
+                <button type="button" class="btn btn-primary editoroptions" onClick={() => handleFontDown("js")} >-</button>
+              </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          
+        </Modal.Footer>
+      </Modal>
+
     </div> 
   )
 }
