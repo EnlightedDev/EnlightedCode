@@ -11,7 +11,7 @@ function Editors() {
   const [css, setCss] = useLocalStorage("css", "")
   const [js, setjs] = useLocalStorage("js", "")
   const [htmlHead, setHtmlHead] = useState("")
-  const [updown, setUpDown] = useState(300)
+  const [updown, setUpDown] = useState(330)
   const [iheight, setIHeight] = useState(270)
   const [buttonText, setButtonText] = useState('Move Up')
   const [htmlfontSize, setHtmlFontSize] = useState(14)
@@ -22,10 +22,10 @@ function Editors() {
 
   const handleUpDown = () => {
 
-    if(updown == 300) {
-      setUpDown(40)
+    if(updown == 330) {
+      setUpDown(70)
     } else {
-      setUpDown(300)
+      setUpDown(330)
     }
     
     if(iheight == 270){
