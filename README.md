@@ -1,4 +1,4 @@
-# React Bootstrap Code Editor
+# EnlightedCode
 
 A simple HTML, CSS, and JS editor inspired by CodePen, built using React with Bootstrap styles and custom hooks.
 
@@ -12,15 +12,15 @@ A simple HTML, CSS, and JS editor inspired by CodePen, built using React with Bo
 - **JS Editor:** Add interactivity using the JavaScript editor.
 - **Live Output:** Instantly see the result of your code in the live output section.
 - **Responsive Design:** Utilizes Bootstrap styles for a polished and responsive user interface.
-- **Custom Hooks:** Incorporates custom React hooks for enhanced functionality.
+- **Custom Hooks:** Incorporates custom React hook for local Storage.
 
 ## Demo
 
-Include a link or GIF to a live demo or a screenshot of your app.
+![](Image.png)
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine.
+Follow these instructions to get a copy of the project up and running on your local machine. ***This app is not created using npx create-react-app.***
 
 ## Prerequisites
 
@@ -31,12 +31,12 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/EnlightedDev/EnlightedCode.git
 
 2. Navigate to the project directory:
 
     ```bash
-    cd your-project
+    cd EnlightedCode
 
 3. Install Dependencies:
 
@@ -50,7 +50,7 @@ Follow these instructions to get a copy of the project up and running on your lo
      ```bash
      npm start
 
-2. Open the browser and go to [http://localhost:3000](http://localhost:3000)
+2. Open the browser and go to [http://localhost:8080](http://localhost:8080)
 
 3. Use the HTML, CSS, and JS editors to write your code.
 
