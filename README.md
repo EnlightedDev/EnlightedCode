@@ -2,7 +2,7 @@
 
 A simple HTML, CSS, and JS editor inspired by CodePen, built using React with Bootstrap styles and custom hooks.
 
-[https://enlighteddev.github.io/EnlightedCode/](https://enlighteddev.github.io/EnlightedCode/)
+[https://gaddisathwik.github.io/EnlightedCode/](https://gaddisathwik.github.io/EnlightedCode/)
 
 
 ## Features
